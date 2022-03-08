@@ -1,9 +1,17 @@
 const seatsDiv = document.querySelector('.container');
 const filmName = document.getElementById('film');
 const totalPrice = document.getElementById('total');
+const countSeat = document.getElementById('count');
 const movieDrowdown = document.getElementById('movie');
 
-let selectedSeatNum;
+let selectedSeatNum = 0;
+let filmPrice = 10;
+let totalMoney = 0;
+
+//Function that store data at LocalStorage
+localStorageFunction = () => {
+  localStorage.setItem('totalMoney', Number(totalMoney));
+};
 
 //selecting seats
 seatsDiv.addEventListener('click', (e) => {
@@ -13,7 +21,14 @@ seatsDiv.addEventListener('click', (e) => {
   ) {
     e.target.classList.toggle('selected');
     e.target.classList.toggle('newCustomer');
+    if (e.target.classList.contains('selected')) selectedSeatNum++;
+    if (!e.target.classList.contains('selected')) selectedSeatNum--;
   }
+  countSeat.innerText = selectedSeatNum;
+  totalMoney = filmPrice * selectedSeatNum;
+  totalPrice.innerText = totalMoney;
+  console.log(filmPrice);
+  localStorageFunction();
 });
 
 //changes the sentence below the seats.
@@ -23,6 +38,8 @@ movieDrowdown.addEventListener('change', (e) => {
     0,
     selectedDropdown.lastIndexOf('(')
   );
-  totalPrice.innerText = e.target.value;
-  console.log(totalPrice.innerText);
+  filmPrice = e.target.value;
+  totalMoney = filmPrice * selectedSeatNum;
+  totalPrice.innerText = totalMoney;
+  localStorageFunction();
 });
