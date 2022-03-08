@@ -11,7 +11,11 @@ let totalMoney = 0;
 //Function that store data at LocalStorage
 localStorageFunction = () => {
   localStorage.setItem('totalMoney', Number(totalMoney));
+  localStorage.setItem('filmPrice', Number(filmPrice));
+  localStorage.setItem('selectedSeatNum', Number(selectedSeatNum));
 };
+
+console.log(localStorage.getItem('totalMoney'));
 
 //selecting seats
 seatsDiv.addEventListener('click', (e) => {
@@ -21,13 +25,12 @@ seatsDiv.addEventListener('click', (e) => {
   ) {
     e.target.classList.toggle('selected');
     e.target.classList.toggle('newCustomer');
-    if (e.target.classList.contains('selected')) selectedSeatNum++;
-    if (!e.target.classList.contains('selected')) selectedSeatNum--;
+    if (e.target.classList.contains('selected')) selectedSeatNum += 1;
+    if (!e.target.classList.contains('selected')) selectedSeatNum -= 1;
   }
   countSeat.innerText = selectedSeatNum;
   totalMoney = filmPrice * selectedSeatNum;
   totalPrice.innerText = totalMoney;
-  console.log(filmPrice);
   localStorageFunction();
 });
 
