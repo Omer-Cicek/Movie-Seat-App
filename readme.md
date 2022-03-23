@@ -17,7 +17,7 @@ Thanks to visit my Github! This project is created with HTML, CSS and JavaScript
 ## Problem Statement
 
 - Design a page following the design in.
-  ![Form](movie_seat_booking.gif)
+  ![Form](Movie.gif)
 
 ## Got feedback for me?
 
